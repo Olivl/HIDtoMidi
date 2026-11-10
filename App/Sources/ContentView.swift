@@ -69,7 +69,7 @@ struct ContentView: View {
 
     private var deviceSection: some View {
         HStack(spacing: 12) {
-            Text("Clavier :").bold()
+            Text("Périphérique :").bold()
             Picker("", selection: $model.deviceKey) {
                 Text("— Choisir un appareil —").tag(String?.none)
                 ForEach(model.pickerDevices) { d in Text(d.label).tag(Optional(d.id)) }
@@ -146,7 +146,7 @@ struct ContentView: View {
     private var mappingList: some View {
         List {
             if model.mappings.isEmpty {
-                Text("Aucune touche configurée. Choisissez le clavier ci-dessus, cliquez sur « Ajouter par appui » puis appuyez sur une touche.")
+                Text("Aucune touche configurée. Choisissez le périphérique ci-dessus, cliquez sur « Capturer » puis appuyez sur une touche.")
                     .foregroundColor(.secondary)
                     .padding(.vertical, 8)
             }
@@ -167,7 +167,7 @@ struct ContentView: View {
             Button {
                 model.learn(AppModel.newRowID)
             } label: {
-                Label(waitingNew ? "Appuyez sur une touche… (Échap pour annuler)" : "Ajouter par appui",
+                Label(waitingNew ? "Appuyez sur une touche… (Échap pour annuler)" : "Capturer",
                       systemImage: "keyboard")
             }
             .tint(waitingNew ? .orange : nil)

@@ -18,10 +18,10 @@ Utilitaire macOS (13 Ventura et plus, **Intel et Apple Silicon**) qui transforme
 
 ### Utilisation
 
-1. **Clavier** : choisir l'appareil dans la liste déroulante. Seules ses touches sont converties. L'app le retrouve tout seul quand il se reconnecte.
+1. **Périphérique** : choisir l'appareil dans la liste déroulante. Seules ses touches sont converties. L'app le retrouve tout seul quand il se reconnecte.
 2. **Mode exclusif** (activé par défaut) : les touches de ce périphérique ne tapent plus rien dans les autres applications. Le clavier intégré du Mac n'est jamais capturé.
    macOS réserve la capture directe d'un clavier aux programmes lancés en root. HIDtoMidi bloque donc les frappes de ce périphérique avec un filtre, ce qui demande une autorisation de plus : **Réglages Système → Confidentialité et sécurité → Accessibilité**. Un bandeau orange l'indique. 
-3. **Ajouter par appui** : cliquer, puis appuyer sur une touche du périphérique choisi. Une ligne est créée pour cette touche. Le bouton clavier de chaque ligne réattribue une touche. *Échap* annule.
+3. **Capturer** : cliquer, puis appuyer sur une touche du périphérique choisi. Une ligne est créée pour cette touche. Le bouton clavier de chaque ligne réattribue une touche. *Échap* annule.
 4. Pour chaque touche, choisir :
    - le **message** : Note, Control Change, Program Change, Program +1 ou Program −1 ;
    - le **canal**, le **n°** (note, CC ou programme), la **valeur** (vélocité ou valeur CC) et la valeur **Off** du CC ;

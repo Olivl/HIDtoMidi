@@ -36,6 +36,9 @@ rm -f build/HIDtoMidi-arm64 build/HIDtoMidi-x86_64 build/overlay.yaml build/empt
 cp App/Info.plist "$APP/Contents/Info.plist"
 cp App/Icons/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
 codesign --force --sign - "$APP"
+# Force le Finder et le Dock à relire l'icône (sinon ils gardent l'ancienne en cache).
+touch "$APP"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$APP" || true
 ditto -c -k --keepParent "$APP" build/HIDtoMidi.zip
 
 lipo -info "$APP/Contents/MacOS/HIDtoMidi"
