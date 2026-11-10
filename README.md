@@ -4,15 +4,7 @@ Utilitaire macOS (13 Ventura et plus, **Intel et Apple Silicon**) qui transforme
 
 ## Application (recommandé)
 
-`build/HIDtoMidi.app` est un binaire universel : le même `.app` tourne sur un Mac Intel sous Ventura et sur un Mac M1/M2 sous Sequoia.
-
-### Compiler (sur n'importe quel Mac, Apple Silicon compris)
-
-```bash
-./build-app.sh          # → build/HIDtoMidi.app et build/HIDtoMidi.zip
-```
-
-Il faut seulement les outils en ligne de commande (`xcode-select --install`). Xcode n'est pas nécessaire.
+`HIDtoMidi.app` est un binaire universel : le même `.app` tourne sur un Mac Intel sous Ventura et sur un Mac M1/M2 sous Sequoia.
 
 ### Installer sur un Mac (Intel / Ventura)
 
@@ -43,10 +35,10 @@ Une touche peut avoir plusieurs lignes, par exemple un PC et un CC à la fois. P
 
 > Les noms de touches correspondent à la position sur un clavier QWERTY : sur un clavier AZERTY, la touche « A » s'affiche « Q ». Ça ne gêne pas : la détection par appui attribue toujours la bonne touche.
 
-## Changer de version
+### Compiler (sur n'importe quel Mac, Apple Silicon compris)
 
-Le numéro de version se modifie uniquement dans [App/Info.plist](App/Info.plist) :
-- `CFBundleShortVersionString` : la version affichée (1.0, 1.1, 2.0…) ;
-- `CFBundleVersion` : le n° de compilation (1, 2, 3…), à augmenter à chaque diffusion.
+```bash
+./build-app.sh          # → build/HIDtoMidi.app et build/HIDtoMidi.zip
+```
 
-L'app affiche ce numéro dans le menu HIDtoMidi → À propos et en bas de la fenêtre.
+Il faut seulement les outils en ligne de commande (`xcode-select --install`). Xcode n'est pas nécessaire.
