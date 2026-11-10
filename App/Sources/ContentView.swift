@@ -31,6 +31,8 @@ struct ContentView: View {
                 Spacer()
                 Text("Noms de touches selon la position QWERTY · Notes : C3 = 60")
                     .font(.caption).foregroundColor(.secondary)
+                Text("·").font(.caption).foregroundColor(.secondary)
+                Text("v\(AppInfo.version)").font(.caption).foregroundColor(.secondary)
             }
         }
         .padding(16)
