@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#252830"/><stop offset="1" stop-color="#0F1014"/></linearGradient>
+<radialGradient id="lit" cx="0.5" cy="0.4" r="0.7"><stop offset="0" stop-color="#E9B8FF"/><stop offset="0.55" stop-color="#A65BF0"/><stop offset="1" stop-color="#6A3BE8"/></radialGradient>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="36"/></filter>
+</defs>
+<rect x="100" y="100" width="824" height="824" rx="185" fill="url(#g)"/>
+<g fill="#2D313B">
+<rect x="212" y="212" width="280" height="280" rx="46"/>
+<rect x="532" y="212" width="280" height="280" rx="46"/>
+<rect x="212" y="532" width="280" height="280" rx="46"/>
+</g>
+<rect x="532" y="532" width="280" height="280" rx="46" fill="#B04CF0" filter="url(#glow)" opacity="0.8"/>
+<rect x="532" y="532" width="280" height="280" rx="46" fill="url(#lit)"/>
+<g fill="#FFFFFF">
+<ellipse cx="650" cy="738" rx="47" ry="36" transform="rotate(-22 650 738)"/>
+<rect x="676" y="582" width="22" height="160"/>
+<path d="M676 582 q74 28 68 108 q-16 -52 -68 -56 z"/>
+</g>
+</svg>

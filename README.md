@@ -1,0 +1,47 @@
+# HIDtoMidi
+
+Utilitaire macOS (13 Ventura et plus, **Intel et Apple Silicon**) qui transforme les touches d'**un clavier précis** (par exemple un clavier Bluetooth) en **Note, Control Change ou Program Change**.
+
+## Application (recommandé)
+
+`build/HIDtoMidi.app` est un binaire universel : le même `.app` tourne sur un Mac Intel sous Ventura et sur un Mac M1/M2 sous Sequoia.
+
+### Compiler (sur n'importe quel Mac, Apple Silicon compris)
+
+```bash
+./build-app.sh          # → build/HIDtoMidi.app et build/HIDtoMidi.zip
+```
+
+Il faut seulement les outils en ligne de commande (`xcode-select --install`). Xcode n'est pas nécessaire.
+
+### Installer sur l'autre Mac (Intel / Ventura)
+
+1. Copie `build/HIDtoMidi.zip`, décompresse-le et mets `HIDtoMidi.app` dans `/Applications`.
+2. L'app n'est pas signée par un développeur Apple, donc macOS la bloque au premier lancement :
+   - **Ventura** : clic droit sur l'app → Ouvrir → Ouvrir.
+   - **Sequoia** : lance-la une fois (elle est bloquée), puis va dans Réglages Système → Confidentialité et sécurité → en bas, « Ouvrir quand même ».
+   - Dans tous les cas, si macOS dit qu'elle est « endommagée » : `xattr -dr com.apple.quarantine /Applications/HIDtoMidi.app`
+3. Autorise HIDtoMidi dans **Réglages Système → Confidentialité et sécurité → Surveillance de l'entrée** (puis relance l'app), et dans **Accessibilité** pour le mode exclusif.
+   *(Chaque nouvelle compilation change la signature : il faudra peut-être retirer l'ancienne entrée et autoriser de nouveau.)*
+
+### Utilisation
+
+1. **Clavier** : choisis l'appareil dans la liste déroulante. Seules ses touches sont converties. L'app le retrouve tout seul quand il se reconnecte (sortie de veille Bluetooth).
+2. **Mode exclusif** (activé par défaut) : les touches de ce clavier ne tapent plus rien dans les autres applications. Le clavier intégré du Mac n'est jamais capturé.
+   macOS réserve la capture directe d'un clavier aux programmes lancés en root. HIDtoMidi bloque donc les frappes de ce clavier avec un filtre, ce qui demande une autorisation de plus : **Réglages Système → Confidentialité et sécurité → Accessibilité**. Un bandeau orange l'indique. Le blocage s'active tout seul une fois l'autorisation donnée, et le statut affiche « exclusif par filtre ». Le MIDI part avant le filtre, donc il n'est pas ralenti.
+3. **Ajouter par appui** : clique, puis appuie sur une touche du clavier choisi. Une ligne est créée pour cette touche. Le bouton clavier de chaque ligne réattribue une touche. *Échap* annule.
+4. Pour chaque touche, choisis :
+   - le **message** : Note, Control Change, Program Change, Program +1 ou Program −1 ;
+   - le **canal**, le **n°** (note, CC ou programme), la **valeur** (vélocité ou valeur CC) et la valeur **Off** du CC ;
+   - le **mode** : *Maintenu* (on à l'appui, off au relâchement), *Bascule* (un appui = on, l'appui suivant = off) ou *Impulsion* (à l'appui seulement).
+5. Dans ton logiciel (DAW, QLab…), choisis l'entrée MIDI **HIDtoMidi**. Tu peux aussi envoyer directement vers une sortie existante (bus IAC, interface USB).
+
+Une touche peut avoir plusieurs lignes, par exemple un PC et un CC à la fois. Pendant le jeu, la ligne de la touche enfoncée s'allume. **Panic** coupe toutes les notes. **Importer / Exporter** sert à passer la configuration d'un Mac à l'autre. Les réglages sont enregistrés automatiquement.
+
+> Les noms de touches correspondent à la position sur un clavier QWERTY : sur un clavier AZERTY, la touche « A » s'affiche « Q ». Ça ne gêne pas : la détection par appui attribue toujours la bonne touche.
+
+### Latence
+
+- Les touches sont lues en HID brut (IOKit), sans passer par le gestionnaire d'événements clavier de macOS.
+- La lecture se fait sur un thread dédié à haute priorité. Le callback HID envoie le message MIDI directement à CoreMIDI : pas de passage par l'interface, pas de verrou, pas d'allocation de mémoire. L'interface n'est prévenue qu'après l'envoi.
+- App Nap est désactivé : l'app reste aussi réactive en arrière-plan.
