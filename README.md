@@ -6,7 +6,7 @@ Utilitaire macOS (13 Ventura et plus, **Intel et Apple Silicon**) qui transforme
 
 `HIDtoMidi.app` est un binaire universel : le même `.app` tourne sur un Mac Intel sous Ventura et sur un Mac M1/M2 sous Sequoia.
 
-### Installer sur un Mac (Intel / Ventura)
+### Installer sur un Mac
 
 1. Télécharger la dernière release disponible, la décompresser et mettre `HIDtoMidi.app` dans `/Applications`.
 2. L'app n'est pas signée par un développeur Apple, donc macOS la bloque au premier lancement :
